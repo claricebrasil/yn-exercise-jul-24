@@ -22,7 +22,7 @@ The table view displays the collected information in a structured format, making
 The table should have a delete and an edit icon associated with it. Click on delete icon to clean the information filled and the edit icon to be redirect to the form to edit the information.
 
 #### How to Use
-Navigate to Table View: Click on the "Table" link in the side menu.
+Fill the Form and submit your informations to be redirected to the Table View or navigate to Table View: Click on the "Table" link in the side menu.
 View Responses: The table will display the previously submitted user responses.
 
 ## Installation
