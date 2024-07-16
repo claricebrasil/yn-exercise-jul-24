@@ -13,21 +13,30 @@ type AnswersStoreActions = {
 export type AnswersStore = AnswersStoreProperties & AnswersStoreActions
 
 const initialState: AnswersStoreProperties = {
-    name: '',
-    mail: '',
     age: '',
     interests: [],
+    name: '',
+    mail: '',
 }
 
-const createStore: StateCreator<AnswersStore> = (set, get) => ({
-    ...initialState,
-    setAnswers: answers => set(state => ({ ...state, ...answers })),
-    getAnswers: () => ({
-        age: get().age,
-        name: get().name,
-        mail: get().mail,
-        interests: get().interests,
-    }),
-})
+const createStore: StateCreator<AnswersStore> = (set, get) => {
+    const storedState = JSON.parse(localStorage.getItem('answersState') || '{}')
+    return {
+        ...initialState,
+        ...storedState,
+        setAnswers: answers =>
+            set(state => {
+                const _state = { ...state, ...answers }
+                localStorage.setItem('answersState', JSON.stringify(_state))
+                return _state
+            }),
+        getAnswers: () => ({
+            age: get().age,
+            name: get().name,
+            mail: get().mail,
+            interests: get().interests,
+        }),
+    }
+}
 
 export const useAnswersStore = create(devtools(createStore))
