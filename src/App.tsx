@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+} from 'react-router-dom'
 
 import { SideMenu } from './components'
 import { APP_ROUTES } from './domain/routes'
@@ -10,6 +15,10 @@ const App = () => (
         <Router>
             <SideMenu routes={APP_ROUTES}>
                 <Routes>
+                    <Route
+                        path={APP_ROUTES.HOME}
+                        element={<Navigate to={APP_ROUTES.FORM} />}
+                    />
                     <Route path={APP_ROUTES.FORM} element={<FormView />} />
                     <Route path={APP_ROUTES.TABLE} element={<TableView />} />
                 </Routes>
