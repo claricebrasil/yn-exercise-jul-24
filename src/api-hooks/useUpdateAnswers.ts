@@ -10,6 +10,7 @@ import { useAnswersStore } from '../state'
 
 export const useUpdateAnswers = () => {
     const setAnswers = useAnswersStore(state => state.setAnswers)
+
     return useMutation({
         mutationFn: async (newAnswers: DomainAnswers) => {
             const convertedNewAnswers = domainToApiAnswersConverter(newAnswers)

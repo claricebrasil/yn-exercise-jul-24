@@ -33,22 +33,20 @@ export const FormView = () => {
     const updateAnswersMutation = useUpdateAnswers()
 
     const onSubmit = handleSubmit(formData => {
-        const interestsUpdated = formData.interests as InterestForm
+        const interests = formData.interests as InterestForm
 
-        const updatedInterests = Object.entries(interestsUpdated).map(
-            ([key, value]) => ({
-                [key]: {
-                    isChecked: value.checked,
-                    label: value.label,
-                },
-            }),
-        )
+        const _interests = Object.entries(interests).map(([key, value]) => ({
+            [key]: {
+                isChecked: value.checked,
+                label: value.label,
+            },
+        }))
 
         updateAnswersMutation.mutate({
             name: formData.name,
             mail: formData.mail,
             age: formData.age,
-            interests: updatedInterests,
+            interests: _interests,
         })
 
         navigate('/table')
