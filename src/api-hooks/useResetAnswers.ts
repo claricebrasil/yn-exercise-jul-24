@@ -4,8 +4,19 @@ import { resetAnswersFromApi } from '../api/api'
 import { apiToDomainAnswersConverter } from '../api/converters'
 import { useAnswersStore } from '../state'
 
-// TASK 6:
-// - You need to implement a new hook called useResetAnswers.
-// - Once implemented, you should be able to use this hook in the Table view.
+export const useResetAnswers = () => {
+    const answesStore = useAnswersStore()
 
-export const useResetAnswers = () => {}
+    const reset = useMutation(() => resetAnswersFromApi(), {
+        onSuccess: response => {
+            const domainAnswers = apiToDomainAnswersConverter(response.data)
+            answesStore.setAnswers(domainAnswers)
+        },
+    })
+
+    const resetAnswers = () => {
+        reset.mutate()
+    }
+
+    return { resetAnswers }
+}
